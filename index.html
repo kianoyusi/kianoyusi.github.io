@@ -3,63 +3,263 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Nafar Jafar A</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Portofolio Nafar Jafar A</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- CSS untuk Tampilan --- */
+        /* --- 1. Settingan Warna & Font Dasar --- */
+        :root {
+            --bg-color: #0a192f;       /* Warna Latar Belakang (Navy Gelap) */
+            --text-primary: #ccd6f6;   /* Warna Teks Utama (Abu Terang) */
+            --text-secondary: #8892b0; /* Warna Teks Sekunder (Abu Gelap) */
+            --accent-color: #64ffda;   /* Warna Aksen (Hijau Mint/Teal) - Khas Brittany Chiang */
+        }
+
         body {
             margin: 0;
-            padding: 20px;
-            font-family: 'Poppins', sans-serif; /* Font modern */
-            /* Background gradasi keren */
-            background: linear-gradient(135deg, #1c2e4a, #2c3e50);
-            color: #333;
-            min-height: 100vh; /* Tinggi minimal selebar layar */
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* --- 2. Layout Container --- */
+        .container {
+            max-width: 1000px; /* Lebar maksimal konten agar enak dibaca */
+            margin: 0 auto;    /* Posisi tengah */
+            padding: 0px 50px; /* Jarak kiri kanan */
+        }
+
+        section {
+            padding: 100px 0; /* Jarak antar seksi (Hero, About, Project) */
+            min-height: 60vh; /* Tinggi minimal setiap seksi */
+        }
+
+        /* Gaya Link Umum */
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        a:hover { text-decoration: underline; }
+
+        /* Judul Seksi (Misal: 01. About Me) */
+        .section-title {
             display: flex;
-            justify-content: center;
             align-items: center;
-        }
-
-        /* Wadah utama di tengah */
-        .main-container {
-            max-width: 800px;
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.95); /* Putih agak transparan */
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3); /* Bayangan besar */
-        }
-
-        /* Header */
-        header {
-            text-align: center;
+            font-size: 26px;
+            color: var(--text-primary);
             margin-bottom: 40px;
         }
-        h1 {
-            color: #1c2e4a;
-            margin: 0;
-            font-size: 2.5em;
+        /* Garis di samping judul */
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 200px;
+            height: 1px;
+            background-color: var(--text-secondary);
+            margin-left: 20px;
+            opacity: 0.5;
         }
-        .intro-text {
-            color: #666;
-            font-size: 1.1em;
-            margin-top: 10px;
+        /* Nomor di depan judul */
+        .section-number {
+            color: var(--accent-color);
+            font-family: monospace;
+            margin-right: 10px;
+            font-size: 20px;
         }
 
-        /* Judul Seksi */
-        h2.section-title {
-            color: #2c3e50;
-            border-bottom: 3px solid #3498db;
+        /* --- 3. Bagian Hero (Intro) --- */
+        #hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 90vh; /* Hampir selebar layar penuh */
+        }
+        .hero-intro { color: var(--accent-color); font-family: monospace; margin-bottom: 20px; }
+        .hero-name { font-size: clamp(40px, 8vw, 70px); font-weight: 700; margin: 0; color: var(--text-primary); }
+        .hero-subtitle { font-size: clamp(30px, 6vw, 60px); font-weight: 700; margin: 0; color: var(--text-secondary); }
+        .hero-desc { max-width: 500px; margin-top: 20px; color: var(--text-secondary); }
+        
+        /* Tombol Keren */
+        .btn-main {
+            color: var(--accent-color);
+            background-color: transparent;
+            border: 1px solid var(--accent-color);
+            border-radius: 4px;
+            padding: 15px 30px;
+            font-family: monospace;
+            margin-top: 50px;
             display: inline-block;
-            padding-bottom: 10px;
-            margin-bottom: 30px;
+            transition: 0.3s;
         }
+        .btn-main:hover { background-color: rgba(100, 255, 218, 0.1); text-decoration: none; }
 
-        /* --- Kartu Project --- */
+
+        /* --- 4. Bagian About --- */
+        .about-content {
+            display: grid;
+            grid-template-columns: 3fr 2fr; /* Membagi area jadi 2 kolom (Teks kiri, Foto kanan) */
+            gap: 50px;
+        }
+        .tech-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(140px, 200px)); /* List 2 kolom */
+            gap: 10px;
+            padding: 0;
+            margin-top: 20px;
+            list-style: none;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        /* Ikon panah kecil di list teknologi */
+        .tech-list li::before { content: "▹"; color: var(--accent-color); margin-right: 10px; }
+        
+        /* Placeholder Foto Profil (Kotak Hijau) */
+        .profile-pic-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+        }
+        .profile-pic-placeholder {
+            width: 100%;
+            height: 300px;
+            background-color: var(--accent-color);
+            border-radius: 5px;
+            opacity: 0.5;
+            transition: 0.3s;
+        }
+        .profile-pic-placeholder:hover { opacity: 0.8; }
+
+
+        /* --- 5. Bagian Project (PENTING) --- */
         .project-card {
-            background: white;
+            background-color: #112240; /* Warna kartu sedikit lebih terang dari background */
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            transition: transform 0.3s;
+        }
+        .project-card:hover { transform: translateY(-5px); } /* Efek naik saat di-hover */
+        .project-overline { color: var(--accent-color); font-family: monospace; font-size: 14px; }
+        .project-title { margin: 10px 0; font-size: 24px; }
+        .project-title a { color: var(--text-primary); }
+        .project-desc-box {
+            background-color: #1d3557; /* Box deskripsi lebih menonjol */
+            padding: 20px;
+            border-radius: 5px;
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+        .project-tech-list {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            padding: 0;
+            font-family: monospace;
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin: 20px 0;
+        }
+        .project-links a { margin-right: 20px; font-weight: bold; }
 
+        /* Footer */
+        footer { text-align: center; padding: 20px; color: var(--text-secondary); font-family: monospace; font-size: 12px; }
+
+        /* Responsif untuk HP */
+        @media (max-width: 768px) {
+            .container { padding: 0 25px; }
+            .about-content { grid-template-columns: 1fr; } /* Jadi 1 kolom di HP */
+            .profile-pic-wrapper { margin: auto; }
+            section { padding: 60px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <section id="hero">
+        <div class="container">
+            <h1 class="hero-intro">Hi, my name is</h1>
+            <h2 class="hero-name">Nafar Jafar A.</h2>
+            <h3 class="hero-subtitle">I build things for data and web.</h3>
+            <p class="hero-desc">
+                Saya adalah Mahasiswa Sistem Informasi yang berfokus pada pengembangan software dan analisis data. Saat ini sedang aktif membangun satu project coding setiap dua hari untuk mengasah skill.
+            </p>
+            <a href="LINK_LINKEDIN_KAMU_DISINI" target="_blank" class="btn-main">Lihat Profil LinkedIn Saya</a>
         </div>
+    </section>
+
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title"><span class="section-number">01.</span>About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        Halo! Saya Nafar, seorang mahasiswa yang antusias dengan teknologi. Ketertarikan saya pada programming dimulai ketika saya menyadari betapa kuatnya data dan kode dalam memecahkan masalah nyata.
+                    </p>
+                    <p>
+                        Saat ini saya sedang fokus meningkatkan disiplin dengan tantangan "1 Project per 2 Hari", mencakup Front-end, Back-end (Python), dan Data.
+                    </p>
+                    <p>Berikut adalah beberapa teknologi yang sedang saya gunakan:</p>
+                    <ul class="tech-list">
+                        <li>JavaScript (ES6+)</li>
+                        <li>Python</li>
+                        <li>HTML & CSS</li>
+                        <li>Pandas (Data)</li>
+                        <li>Git & GitHub</li>
+                        <li>SQL</li>
+                    </ul>
+                </div>
+                <div class="profile-pic-wrapper">
+                    <div class="profile-pic-placeholder" title="Tempat Foto Profil Nanti"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title"><span class="section-number">02.</span>Some Things I've Built</h2>
+            
+            <div class="project-card">
+                <p class="project-overline">Featured Project</p>
+                <h3 class="project-title">Simple Pomodoro Timer</h3>
+                <div class="project-desc-box">
+                    <p>
+                        Aplikasi web sederhana untuk meningkatkan produktivitas menggunakan teknik Pomodoro (fokus 25 menit). Project ini dibuat untuk melatih pemahaman tentang **JavaScript DOM Manipulation** dan logika waktu (`setInterval`).
+                    </p>
+                </div>
+                <ul class="project-tech-list">
+                    <li>HTML5</li>
+                    <li>CSS3</li>
+                    <li>JavaScript</li>
+                </ul>
+                <div class="project-links">
+                    <a href="https://kianoyusi.github.io/pomodoro-project/" target="_blank">🔗 Live Demo</a>
+                    <a href="https://github.com/kianoyusi/pomodoro-project" target="_blank">📂 View Code</a>
+                </div>
+            </div>
+
+            </div>
+    </section>
+
+
+    <section id="contact">
+        <div class="container" style="text-align: center; max-width: 600px;">
+            <h2 class="section-title" style="justify-content: center;"><span class="section-number">03.</span>What's Next?</h2>
+            <h2 style="font-size: 50px; color: var(--text-primary); margin-bottom: 20px;">Get In Touch</h2>
+            <p style="color: var(--text-secondary);">
+                Saya saat ini sedang mencari peluang magang di bidang software engineering atau data. Jika Anda memiliki pertanyaan atau sekadar ingin menyapa, inbox saya selalu terbuka!
+            </p>
+            <a href="mailto:EMAIL_KAMU@GMAIL.COM" class="btn-main">Say Hello</a>
+        </div>
+    </section>
+
+
+    <footer>
+        <p>Built by Nafar Jafar A. | Inspired by Brittany Chiang's Design</p>
+    </footer>
 
 </body>
 </html>
